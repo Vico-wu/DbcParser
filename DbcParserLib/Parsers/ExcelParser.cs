@@ -688,6 +688,7 @@ namespace DbcParserLib.Parsers
                         if (columnMapping[key].ColumnIndex == col)
                         {
                             transmitter = columnMapping[key].Header;
+                            return true;
                         }
                     }
                 }

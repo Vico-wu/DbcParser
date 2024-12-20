@@ -371,6 +371,7 @@ namespace DbcParserLib.Generators
             foreach (ExcelGroupMessageModel rowGroup in _messageGroupList)
             {
                 _sheet.GroupRow(rowGroup.StartIndex, rowGroup.EndIndex);
+                _sheet.RowSumsBelow = false;
                 //_sheet.SetRowGroupCollapsed(rowGroup.StartIndex, true);
             }
             // Set column widths based on the dictionary

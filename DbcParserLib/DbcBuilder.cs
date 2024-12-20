@@ -447,10 +447,8 @@ namespace DbcParserLib
             foreach (var message in m_messages)
             {
                 message.Value.Signals.Clear();
-                if(m_signals.TryGetValue(message.Key, out var signals) && signals != null)
-                    
-                    message.Value.Signals.AddRange(signals.Values.ToList().Sort((x, y) => x.StartBit.CompareTo(y.StartBit)));
-
+                if(m_signals.TryGetValue(message.Key, out var signals) && signals != null)                 
+                    message.Value.Signals.AddRange(signals.Values.OrderBy(signal => signal.StartBit));
                 message.Value.AdjustExtendedId();
             }
 
@@ -474,7 +472,7 @@ namespace DbcParserLib
             //}
             //return new Dbc(nodes, messages, environmentVariables);
 
-            return new Dbc(m_nodes.ToArray(), m_messages.Values.ToArray(), m_environmentVariables.Values.ToArray(), m_globalCustomProperties.Values);
+            return new Dbc(m_nodes.OrderBy(node => node.Name).ToArray(), m_messages.Values.OrderBy(message => message.Name).ToArray(), m_environmentVariables.Values.ToArray(), m_globalCustomProperties.Values);
         }
     }
 
